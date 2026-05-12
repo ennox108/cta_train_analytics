@@ -1,0 +1,12 @@
+# dlt secrets — never commit these
+.dlt/secrets.toml
+
+# dbt compiled artifacts
+dbt_cta/target/
+dbt_cta/dbt_packages/
+dbt_cta/logs/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
