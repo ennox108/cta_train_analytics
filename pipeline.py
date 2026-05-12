@@ -33,7 +33,9 @@ def cta_train_source(api_key: str = dlt.secrets.value):
     write_disposition="append",
     primary_key=["run_number", "stop_id", "predicted_arrival_time"],
 )
-def arrivals(api_key: str, routes: list[str] = ALL_ROUTES):
+def arrivals(api_key: str, routes: list[str] = None):
+    if routes is None:
+        routes = ALL_ROUTES
     """
     Calls ttarrivals.aspx for each route and yields arrival predictions.
 
@@ -81,7 +83,9 @@ def arrivals(api_key: str, routes: list[str] = ALL_ROUTES):
     write_disposition="append",
     primary_key=["run_number", "timestamp"],
 )
-def locations(api_key: str, routes: list[str] = ALL_ROUTES):
+def locations(api_key: str, routes: list[str] = None):
+    if routes is None:
+        routes = ALL_ROUTES
     """
     Calls ttpositions.aspx for each route and yields live train positions.
 
