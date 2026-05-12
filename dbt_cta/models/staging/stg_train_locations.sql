@@ -19,7 +19,7 @@ staged as (
         next_stop_id                                        as next_stop_id,
 
         -- timestamp
-        try_to_timestamp(timestamp)                         as recorded_at,
+        convert_timezone('UTC', timestamp::timestamp_tz)    as recorded_at,
 
         -- flags
         case when is_approaching = '1' then true else false end  as is_approaching,

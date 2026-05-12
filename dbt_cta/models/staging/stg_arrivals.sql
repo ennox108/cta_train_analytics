@@ -21,8 +21,8 @@ staged as (
         train_direction                                     as train_direction,
 
         -- timestamps
-        try_to_timestamp(prediction_generated)              as prediction_generated_at,
-        try_to_timestamp(predicted_arrival_time)            as predicted_arrival_at,
+        convert_timezone('UTC', prediction_generated::timestamp_tz)   as prediction_generated_at,
+        convert_timezone('UTC', predicted_arrival_time::timestamp_tz) as predicted_arrival_at,
 
         -- flags (CTA API returns '0'/'1' strings)
         case when is_approaching = '1' then true else false end  as is_approaching,
