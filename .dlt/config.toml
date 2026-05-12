@@ -1,0 +1,15 @@
+# dlt pipeline configuration
+# Non-sensitive settings go here. Secrets (passwords, tokens) go in secrets.toml.
+
+[runtime]
+log_level = "WARNING"
+
+[normalize.data_writer]
+file_max_items = 100000
+
+[destination.snowflake]
+database = "CTA_DB"          # your Snowflake database name
+warehouse = "COMPUTE_WH"    # your Snowflake virtual warehouse
+
+[sources.cta_train]
+dataset_name = "cta_raw"    # Snowflake schema where dlt will land raw tables
