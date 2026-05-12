@@ -1,0 +1,23 @@
+# dbt connection profile for the CTA Train project.
+#
+# Option A: keep this file here and point dbt to it:
+#   dbt run --profiles-dir .
+#
+# Option B: copy the "dbt_cta" block into ~/.dbt/profiles.yml
+#
+# Fill in YOUR_* placeholders before running dbt.
+
+dbt_cta:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "YOUR_ACCOUNT"           # e.g. abc12345.us-east-1
+      user: "YOUR_SNOWFLAKE_USER"
+      password: "YOUR_SNOWFLAKE_PASSWORD"
+      role: "YOUR_ROLE"
+      warehouse: "COMPUTE_WH"
+      database: "CTA_DB"
+      schema: "cta_staging"             # default schema; overridden per model in dbt_project.yml
+      threads: 4
+      client_session_keep_alive: false
