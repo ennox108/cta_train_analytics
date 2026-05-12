@@ -1,0 +1,18 @@
+user:
+  outputs:
+    default:
+      account: RKRMSFJ-ME92235
+      auth_type: keypair
+      client_session_keep_alive: false
+      connect_retries: 3
+      connect_timeout: 30
+      database: CTA_DB
+      private_key_path: /tmp/.dbt/keyfile.pem
+      retry_on_database_errors: true
+      role: ACCOUNTADMIN
+      schema: dbt_cthakare
+      threads: 6
+      type: snowflake
+      user: CHINMAYT
+      warehouse: analytics
+  target: default
