@@ -28,29 +28,45 @@ def cta_train_source(api_key: str = dlt.secrets.value):
     yield locations(api_key=api_key)
 
 
+# Major CTA 'L' station IDs (mapid) — one request per station returns all
+# arrivals across all routes serving that station.
+STATION_IDS = [
+    40900,  # O'Hare
+    40380,  # Clark/Lake (Loop hub)
+    41320,  # Belmont (Red/Brown/Purple)
+    40630,  # Sox-35th (Red)
+    40580,  # Harold Washington Library (Brown/Orange/Pink/Purple)
+    41050,  # Fullerton (Red/Brown/Purple)
+    40730,  # State/Lake (Brown/Green/Orange/Pink/Purple)
+    41160,  # Chicago (Red)
+    40370,  # Merchandise Mart (Brown/Purple)
+    41410,  # Roosevelt (Red/Orange/Green)
+    40850,  # Midway (Orange)
+    41700,  # Howard (Red/Yellow/Purple)
+    40890,  # 95th/Dan Ryan (Red)
+    41240,  # Forest Park (Blue)
+    40750,  # Harlem/Lake (Green)
+]
+
+
 @dlt.resource(
     name="arrivals",
     write_disposition="append",
     primary_key=["run_number", "stop_id", "predicted_arrival_time"],
 )
-def arrivals(api_key: str, routes: list[str] = None):
-    if routes is None:
-        routes = ALL_ROUTES
+def arrivals(api_key: str, station_ids: list[int] = None):
+    if station_ids is None:
+        station_ids = STATION_IDS
     """
-    Calls ttarrivals.aspx for each route and yields arrival predictions.
+    Calls ttarrivals.aspx for each station and yields arrival predictions.
+    Uses mapid (station ID) which is required by the CTA arrivals endpoint.
 
     Snowflake table: cta_raw.arrivals
-    Key fields:
-        station_id, stop_id, station_name, stop_description,
-        run_number, route, destination_stop, destination_name,
-        train_direction, prediction_generated, predicted_arrival_time,
-        is_approaching, is_scheduled, is_fault, is_delayed,
-        latitude, longitude, heading
     """
-    for route in routes:
+    for mapid in station_ids:
         response = requests.get(
             f"{CTA_API_BASE}/ttarrivals.aspx",
-            params={"key": api_key, "rt": route, "outputType": "JSON"},
+            params={"key": api_key, "mapid": mapid, "outputType": "JSON"},
         )
         response.raise_for_status()
         data = response.json()
