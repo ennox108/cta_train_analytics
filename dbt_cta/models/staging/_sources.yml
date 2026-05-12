@@ -1,0 +1,92 @@
+version: 2
+
+sources:
+  - name: cta_raw
+    description: >
+      Raw tables loaded by the dlt CTA Train Tracker pipeline.
+      dlt lands these into the `cta_raw` schema in Snowflake.
+    database: CTA_DB
+    schema: cta_raw
+
+    tables:
+      - name: arrivals
+        description: >
+          Real-time arrival predictions from the CTA Train Tracker API
+          (ttarrivals.aspx). One row per run × stop × predicted arrival time.
+        columns:
+          - name: station_id
+            description: Unique CTA station identifier.
+          - name: stop_id
+            description: Unique CTA stop (platform) identifier.
+          - name: station_name
+            description: Human-readable station name.
+          - name: stop_description
+            description: Direction-specific platform description.
+          - name: run_number
+            description: Train run number.
+          - name: route
+            description: CTA 'L' route code (red, blue, brn, g, org, p, pink, y).
+          - name: destination_stop
+            description: Stop ID of the train's final destination.
+          - name: destination_name
+            description: Name of the train's final destination.
+          - name: train_direction
+            description: "Direction code: 1 = northbound/eastbound, 5 = southbound/westbound."
+          - name: prediction_generated
+            description: Timestamp when this prediction was generated (UTC).
+          - name: predicted_arrival_time
+            description: Predicted arrival timestamp at this stop (UTC).
+          - name: is_approaching
+            description: "1 if the train is within 1 minute of the stop."
+          - name: is_scheduled
+            description: "1 if the prediction is based on schedule rather than live position."
+          - name: is_fault
+            description: "1 if there is a fault condition."
+          - name: is_delayed
+            description: "1 if the train is flagged as delayed."
+          - name: latitude
+            description: Live latitude of the train.
+          - name: longitude
+            description: Live longitude of the train.
+          - name: heading
+            description: Compass heading of the train (degrees).
+          - name: _dlt_load_id
+            description: dlt internal load batch identifier.
+          - name: _dlt_id
+            description: dlt internal row identifier (surrogate key).
+
+      - name: train_locations
+        description: >
+          Live train positions from the CTA Train Tracker API
+          (ttpositions.aspx). One row per run × timestamp.
+        columns:
+          - name: route
+            description: CTA 'L' route code.
+          - name: run_number
+            description: Train run number.
+          - name: destination_stop
+            description: Stop ID of the train's final destination.
+          - name: destination_name
+            description: Name of the train's final destination.
+          - name: train_direction
+            description: Direction code.
+          - name: next_station_id
+            description: Station ID of the next station this train will reach.
+          - name: next_stop_id
+            description: Stop ID of the next stop this train will reach.
+          - name: timestamp
+            description: Timestamp of this position reading (UTC).
+          - name: is_approaching
+            description: "1 if the train is within 1 minute of the next stop."
+          - name: is_delayed
+            description: "1 if the train is flagged as delayed."
+          - name: latitude
+            description: Live latitude of the train.
+          - name: longitude
+            description: Live longitude of the train.
+          - name: heading
+            description: Compass heading of the train (degrees).
+          - name: _dlt_load_id
+            description: dlt internal load batch identifier.
+          - name: _dlt_id
+            description: dlt internal row identifier (surrogate key).
