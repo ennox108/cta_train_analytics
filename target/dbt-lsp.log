@@ -404,3 +404,67 @@
 18:42:05.416987 [info ]: Starting LSP server...
 18:42:05.721641 [info ]: Started loading project
 18:42:05.721740 [info ]: Finished loading project [  0.00s]
+18:43:38.376378 [info ]: Loading profiles.yml
+==================== 2026-05-12T18:49:26.651727Z | 0f797b68-eb49-4d2a-9db3-b2b95023a93b ====================
+18:49:26.651759 [info ]: Starting dbt LSP server
+18:49:26.651770 [info ]: Connecting to LSP client on port 38371
+18:49:26.651920 [info ]: Successfully connected to LSP client
+18:49:26.651928 [info ]: Creating LSP service...
+18:49:26.705611 [info ]: Creating LSP server...
+18:49:26.705632 [info ]: Starting LSP server...
+18:49:26.931946 [info ]: Loading profiles.yml
+18:51:29.091652 [info ]: Started loading project
+18:51:29.091956 [info ]: Loading profiles.yml
+18:51:29.098321 [debug]:    Started loading packages
+18:51:29.098924 [debug]:     Loaded [  0.00s] packages
+18:51:29.099706 [info ]: Started parsing
+18:51:29.126760 [info ]: Finished loading project [  0.04s]
+18:51:29.127377 [debug]: Finished parsing models/example/schema.yml [  0.00s]
+18:51:29.128633 [debug]: Finished parsing models/example/my_first_dbt_model.sql [  0.00s]
+18:51:29.130251 [debug]: Finished parsing models/example/my_second_dbt_model.sql [  0.00s]
+18:51:29.131086 [info ]: Finished parsing [  0.03s]
+18:51:29.131208 [info ]: Cached model count updated: 2 models (estimate)
+18:51:29.131222 [info ]: Cached model count updated: 2 models (accurate)
+18:51:29.131263 [info ]: Started scheduling
+18:51:29.131311 [info ]: Finished scheduling [  0.00s]
+18:51:29.131324 [debug]: Compilation - 0 nodes selected: {}
+18:51:29.131337 [warn ]: dbt1092: The selection criterion '' does not match any enabled nodes
+18:51:29.131350 [warn ]: dbt1601: Nothing to do. Try checking your model configs and model specification args
+18:51:29.131356 [info ]: Started scheduling
+18:51:29.131389 [info ]: Finished scheduling [  0.00s]
+18:51:29.257049 [info ]: Started building task graph
+18:51:29.257102 [info ]: Finished building task graph [  0.00s]
+18:51:29.260253 [info ]: Started scheduling
+18:51:29.260293 [info ]: Finished scheduling [  0.00s]
+18:51:29.260801 [info ]: Cached model count updated: 2 models (accurate)
+18:52:54.861674 [info ]: Started loading project
+18:52:54.861969 [info ]: Loading profiles.yml
+18:52:54.878881 [info ]: Cached model count updated: 2 models (estimate)
+18:52:54.878901 [info ]: Cached model count updated: 2 models (accurate)
+18:52:54.878917 [info ]: Started scheduling
+18:52:54.878961 [info ]: Finished scheduling [  0.00s]
+18:52:54.878975 [debug]: Compilation - 2 nodes selected: {"model.my_new_project.my_first_dbt_model", "model.my_new_project.my_second_dbt_model"}
+18:52:55.003659 [info ]: Started building task graph
+18:52:55.003759 [info ]: Finished building task graph [  0.00s]
+18:52:55.003903 [info ]: Started rendering (2 nodes)
+18:52:55.003924 [info ]: Started model dbt_cthakare.my_second_dbt_model
+18:52:55.003944 [debug]: Started rendering model dbt_cthakare.my_second_dbt_model
+18:52:55.003970 [info ]: Started model dbt_cthakare.my_first_dbt_model
+18:52:55.003979 [debug]: Started rendering model dbt_cthakare.my_first_dbt_model
+18:52:55.004015 [info ]: Finished loading project [  0.14s]
+18:52:55.004652 [debug]: Compiled SQL for node model.my_new_project.my_second_dbt_model at target/.lsp/compiled/my_new_project/models/example/my_second_dbt_model.sql
+18:52:55.004652 [debug]: Compiled SQL for node model.my_new_project.my_first_dbt_model at target/.lsp/compiled/my_new_project/models/example/my_first_dbt_model.sql
+18:52:55.004799 [debug]: Finished rendering [  0.00s] model dbt_cthakare.my_second_dbt_model [success]
+18:52:55.004833 [info ]: Started analyzing (2 nodes)
+18:52:55.004844 [debug]: Started analyzing model dbt_cthakare.my_second_dbt_model
+18:52:55.004870 [debug]: Finished rendering [  0.00s] model dbt_cthakare.my_first_dbt_model [success]
+18:52:55.004884 [info ]: Finished rendering [  0.00s] (2 nodes, 0 skipped, 0 errors)
+18:52:55.004894 [debug]: Started analyzing model dbt_cthakare.my_first_dbt_model
+18:52:55.011591 [debug]: Finished analyzing [  0.01s] model dbt_cthakare.my_first_dbt_model [success]
+18:52:55.011612 [info ]:  Succeeded [  0.01s] model dbt_cthakare.my_first_dbt_model (table)
+18:52:55.011851 [debug]: Finished analyzing [  0.01s] model dbt_cthakare.my_second_dbt_model [success]
+18:52:55.011873 [info ]: Finished analyzing [  0.01s] (2 nodes, 0 skipped, 0 errors)
+18:52:55.011879 [info ]:  Succeeded [  0.01s] model dbt_cthakare.my_second_dbt_model (table)
+18:52:55.014985 [info ]: Started scheduling
+18:52:55.015022 [info ]: Finished scheduling [  0.00s]
+18:52:55.015948 [info ]: Cached model count updated: 2 models (accurate)
