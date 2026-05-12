@@ -1,0 +1,35 @@
+name: CTA Train Pipeline
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # every 15 minutes
+  workflow_dispatch:          # allow manual runs from the GitHub Actions UI
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run dlt pipeline
+        env:
+          # CTA API key
+          SOURCES__CTA_TRAIN__API_KEY: ${{ secrets.CTA_API_KEY }}
+          # Snowflake credentials (dlt reads these via env vars)
+          DESTINATION__SNOWFLAKE__CREDENTIALS__USERNAME: ${{ secrets.SNOWFLAKE_USER }}
+          DESTINATION__SNOWFLAKE__CREDENTIALS__PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+          DESTINATION__SNOWFLAKE__CREDENTIALS__HOST: ${{ secrets.SNOWFLAKE_ACCOUNT }}.snowflakecomputing.com
+          DESTINATION__SNOWFLAKE__CREDENTIALS__DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+          DESTINATION__SNOWFLAKE__CREDENTIALS__WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+          DESTINATION__SNOWFLAKE__CREDENTIALS__ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+        run: python pipeline.py
